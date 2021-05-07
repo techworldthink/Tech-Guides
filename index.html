@@ -17,18 +17,14 @@
         }
 
         p {
-            margin-left: ;
-            margin-right: ;
             font-size: 23px;
         }
 
         pre {
-            margin-left: 2em;
-            margin-right: 2em;
-            font-size: 23px;
+            
             color: white;
             background-color: rgba(0, 0, 0, .8);
-            padding: 5px;
+            
         }
 
         img {
@@ -49,7 +45,8 @@
             color: white;
             text-decoration: none;
         }
-        .original{
+
+        .original {
             text-align: center;
             display: block;
             text-decoration: none;
@@ -107,7 +104,7 @@
     </p>
 
     <pre>
-dmesg | grep ttyUSB <br>
+dmesg | grep ttyUSB 
 [11.263101] usb 1-1.4: cp210x converter now attached to ttyUSB0
         </pre>
 
@@ -236,6 +233,7 @@ Hello World
         hsv_to_rgb function simply converts an HSV value (hue, saturation and brightness) to an RGB value (red, green,
         blue).
     </p>
+
     <pre>
 
 """NeoPixel LED Demo."""
@@ -298,7 +296,7 @@ except KeyboardInterrupt:
 finally:
     np[0] = (0, 0, 0)  # Turn off NeoPixel
     np.write()
-        </pre>
+        
     </pre>
     <p>
         A NeoPixel is instantiated, on GPIO pin 13. One indicates the number of LED’s. Spectrum is a list to represent
@@ -315,6 +313,7 @@ finally:
         the folder where the program is saved. You can use cd and ls just like in a regular terminal. Then use cp to
         copy the program file to the ESP32 which is specified with /pyboard:
     </p>
+
     <pre>
 /home/pi/Documents> cp rgb.py /pyboard
     </pre>
@@ -329,7 +328,7 @@ Type "help()" for more information.
 >>> 
 >>> import rgb
         </pre>
-    </pre>
+   
     <img src="images/neon led/5.jpg"> <br><bR>
     <footer>
         <a class="acenter" href="https://www.rototron.info/raspberry-pi-esp32-micropython-tutorial/">Resources</a>
