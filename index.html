@@ -16,15 +16,18 @@
             text-transform: uppercase;
         }
 
+        body {
+            width: 100%;
+        }
+
         p {
             font-size: 23px;
         }
 
         pre {
+
             
-            color: white;
-            background-color: rgba(0, 0, 0, .8);
-            
+
         }
 
         img {
@@ -90,23 +93,23 @@
     <p>
         Before uploading the firmware, please make sure the Pi is up-to-date. From a terminal, type the following:
     </p>
-    <pre>sudo apt-get update && sudo apt-get upgrade</pre>
+    <pre><code>sudo apt-get update && sudo apt-get upgrade</code></pre>
     <p>
         I recommend you use the latest version of Raspbian to ensure you have all the necessary software.
 
         A utility called ESPTool is used to upload the MicroPython firmware to the ESP32. It is installed using pip3 to
         target Python3:
     </p>
-    <pre>sudo pip3 install esptool</pre>
+    <pre><code>sudo pip3 install esptool</code></pre>
     <p>
         Next the USB port needs to be determined using dmesg | grep ttyUSB. The results should show a CP210x UART to USB
         bridge attached to a USB port. Below the port is ttyUSB0.
     </p>
 
-    <pre>
+    <pre><code>
 dmesg | grep ttyUSB 
 [11.263101] usb 1-1.4: cp210x converter now attached to ttyUSB0
-        </pre>
+        </code></pre>
 
     <p>
         Some boards need to be put in programming mode using the push buttons on the board before you can use the
@@ -115,7 +118,7 @@ dmesg | grep ttyUSB
         and the port name returned by the dmesg command above.
     </p>
 
-    <pre>
+    <pre><code>
 esptool.py --port /dev/ttyUSB0 flash_id
 esptool.py v2.0.1
 Connecting........_
@@ -128,14 +131,14 @@ Manufacturer: c8
 Device: 4016
 Detected flash size: 4MB
 Hard resetting...
-        </pre>
+        </code></pre>
 
     <p>
         The query returns basic info such as the chip type (ESP32) and flash size (4 MB). Before uploading the firmware
         it is recommended to erase the ESP32, which can also be done with the ESPTool:
     </p>
-    <pre>
-esptool.py --port /dev/ttyUSB0 erase_flash</pre>
+    <pre><code>
+esptool.py --port /dev/ttyUSB0 erase_flash</code></pre>
     <p>
         A copy of the MicroPython firmware is required. You could build it yourself from the source code on the
         MicroPython GitHub ESP32 repo, but is much easier to just download a ready-to-go daily build.
@@ -146,9 +149,9 @@ esptool.py --port /dev/ttyUSB0 erase_flash</pre>
 
         <b>UPDATE:</b> the starting address now needs to be 0x1000 instead of zero.
     </p>
-    <pre>
+    <pre><code>
 esptool.py --port /dev/ttyUSB0 write_flash 0x1000 path_to_firmware_file
-    </pre>
+    </code></pre>
     <p>
         MicroPython boards have a Read-Eval-Print Loop (REPL) which is a simple interactive programming environment.
         It’s similar to the Python Idle shell. On the ESP32, the REPL is accessed using a serial connection. Other
@@ -166,23 +169,23 @@ esptool.py --port /dev/ttyUSB0 write_flash 0x1000 path_to_firmware_file
         perform file management. I’ve tried several programs and currently my favorite is rshell. It can be installed
         using pip:
     </p>
-    <pre>
+    <pre><code>
 sudo pip3 install rshell
-    </pre>
+    </code></pre>
     <p>
         This simple program will run on the Raspberry Pi and allow you to access the REPL terminal on the ESP32. It also
         provides file management to transfer and manipulate files on both the Pi and the ESP32. To start rshell, type
         rshell and specify 30 for the buffer size and your USB port:
     </p>
-    <pre>rshell --buffer-size=30 -p /dev/ttyUSB0 </pre>
+    <pre><code>rshell --buffer-size=30 -p /dev/ttyUSB0 </code></pre>
     <p>
         The first prompt can be used to execute file commands. For example, type boards to get a list of connected
         boards. The first line returned should start with the board ID which for my ESP32 is pyboard.
     </p>
-    <pre>
+    <pre><code>
 /home/pi> boards 
 pyboard @ /dev/ttyUSB0 connected Dirs: /boot.py
-    </pre>
+    </code></pre>
     <p>
         The boot.py file is automatically run at startup and contains code to set up the board and finish booting. You
         typically don’t want to edit it. However, you can add a file called main.py if you need your own code to run at
@@ -192,7 +195,7 @@ pyboard @ /dev/ttyUSB0 connected Dirs: /boot.py
         print hello world, outputs hello world.
     </p>
 
-    <pre>
+    <pre><code>
 /home/pi> repl
 Entering REPL. Use Control-X to exit.
 >
@@ -202,7 +205,7 @@ Type "help()" for more information.
 >>> print('Hello World')
 Hello World
 >>> 
-        </pre>
+        </code></pre>
 
     <p>
         Next, let’s upload a MicroPython program to control a NeoPixel LED on the ESP32. A NeoPixel is an RGB led with a
@@ -234,7 +237,7 @@ Hello World
         blue).
     </p>
 
-    <pre>
+    <pre><code>
 
 """NeoPixel LED Demo."""
 from machine import Pin
@@ -297,7 +300,7 @@ finally:
     np[0] = (0, 0, 0)  # Turn off NeoPixel
     np.write()
         
-    </pre>
+    </code></pre>
     <p>
         A NeoPixel is instantiated, on GPIO pin 13. One indicates the number of LED’s. Spectrum is a list to represent
         2048 colors. The first range is zero to 2047 and the 2nd is 2047 to zero. A try statement to catch errors wraps
@@ -314,12 +317,12 @@ finally:
         copy the program file to the ESP32 which is specified with /pyboard:
     </p>
 
-    <pre>
+    <pre><code>
 /home/pi/Documents> cp rgb.py /pyboard
-    </pre>
+    </code></pre>
     <p>Type repl to return the REPL and type import rgb to run the rgb.py program.</p>
 
-    <pre>
+    <pre><code>
 /home/pi> repl
 Entering REPL. Use Control-X to exit.
 >
@@ -327,8 +330,8 @@ MicroPython v1.9.1-218-g56f05137 on 2017-07-01; ESP32 module with ESP32
 Type "help()" for more information.
 >>> 
 >>> import rgb
-        </pre>
-   
+        </code></pre>
+
     <img src="images/neon led/5.jpg"> <br><bR>
     <footer>
         <a class="acenter" href="https://www.rototron.info/raspberry-pi-esp32-micropython-tutorial/">Resources</a>
