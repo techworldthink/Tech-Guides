@@ -8,14 +8,7 @@
     padding: 4em;
   }
 }
-@media only screen and (max-width: 480px) {
-  .img {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-  }
-}
+
 p {
   font-size: 20px;
   line-height: 35px;
@@ -37,13 +30,11 @@ img {
   width: 100%;
 }
 
-@media only screen and (min-width: 481px) {
-  .img {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }
+.img {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 footer {
