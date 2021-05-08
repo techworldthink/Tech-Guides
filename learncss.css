@@ -1,0 +1,35 @@
+.tittle-w3layouts{
+    background-color: yellow;
+    
+
+}
+
+.linked{
+    text-align: center;
+}
+.gray_button{
+    width:100%;
+}
+
+
+.gray_button
+{
+    font-family: Graduate-Regular;
+    animation: color-change1 3s infinite;
+   
+    text-decoration: none;
+    display: inline;
+    
+}
+
+
+
+@keyframes color-change1 {
+    0% { color: red;}
+    50% { color: blue; letter-spacing:1px; }
+    100% { color: red; }
+  }
+
+
+/*................................................................*/
+
