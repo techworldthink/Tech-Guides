@@ -65,8 +65,9 @@ h2 {
   display: block;
   text-decoration: none;
   padding: 5px;
-  color: white;
+ 
   font-family: Georgia, "Times New Roman", Times, serif;
+  color:red;
 }
 
 body {
