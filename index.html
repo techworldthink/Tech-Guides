@@ -5,64 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESP32</title>
+    <link href="assets/style.css" type="text/css" rel="stylesheet">
     <style>
-        h2 {
-            text-align: center;
-            color: red;
-            border-bottom: 2px solid darkgray;
-            padding: 5px;
-            margin-top: 1em;
-            font-size: 25px;
-            text-transform: uppercase;
-        }
 
-
-        p {
-            font-size: 20px;
-            line-height: 35px;
-            margin:10px;
-            text-align: justify;
-            margin-top: 2em;
-            margin-bottom: 2em;
-        }
-
-        pre {
-
-        color:white;
-        font-size: 18px;
-        overflow: auto;
-        background-color: rgba(0,0,0,.8);
-        }
-
-        img {
-            width: 100%;
-        }
-        .img{
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-        }
-
-        footer {
-            height: 20px;
-        }
-
-        .acenter {
-            text-align: center;
-            display: block;
-            padding: 20px;
-            background-color: black;
-            color: white;
-            text-decoration: none;
-           
-        }
-
-        .original {
-            text-align: center;
-            display: block;
-            text-decoration: none;
-        }
     </style>
 </head>
 
@@ -77,11 +22,11 @@
         addition it has multiple analog to digital channels and digital to analog, hardware accelerated encryption,
         pulse width modulation, capacitance touch interfaces and a lot more.
     </p>
-    <div class="img"><img src="images/neon led/1.jpg"></div>
+    <div class="img"><img src="images/neon led/1.jpg" onclick="enlargeImg(this)"></div>
     <p>
         The ESP32 is a more powerful successor to the very popular ESP8266. The following chart compares the specs.
     </p>
-    <div class="img"><img src="images/neon led/0.jpg"></div>
+    <div class="img"><img src="images/neon led/0.jpg" onclick="enlargeImg(this)"></div>
     <p>
         One of the main reasons I like the ESP32 and the ESP8266 is that you can program them in Python. More
         specifically, MicroPython, which is a very efficient streamlined version of the Python 3 programming language
@@ -98,7 +43,7 @@
         micro-USB cable which provides a 2 way serial interface between the Pi and the ESP32. It also provides 5 volts
         to power the ESP32.
     </p>
-    <div class="img"><img src="images/neon led/2.png"></div>
+    <div class="img"><img src="images/neon led/2.png" onclick="enlargeImg(this)"></div>
     <p>
         Before uploading the firmware, please make sure the Pi is up-to-date. From a terminal, type the following:
     </p>
@@ -146,8 +91,8 @@ Hard resetting...
         The query returns basic info such as the chip type (ESP32) and flash size (4 MB). Before uploading the firmware
         it is recommended to erase the ESP32, which can also be done with the ESPTool:
     </p>
-    <pre><code>
-esptool.py --port /dev/ttyUSB0 erase_flash</code></pre>
+    <pre><code>esptool.py --port /dev/ttyUSB0 erase_flash
+</code></pre>
     <p>
         A copy of the MicroPython firmware is required. You could build it yourself from the source code on the
         MicroPython GitHub ESP32 repo, but is much easier to just download a ready-to-go daily build.
@@ -222,7 +167,7 @@ Hello World
         data line. They are often sold in strips with multiple LED’s, but for this demo a single 8mm LED is used. These
         single 8mm LED’s can also be daisy-chained using a single data line.
     </p>
-    <div class="img"><img src="images/neon led/3.jpg"></div>
+    <div class="img"><img src="images/neon led/3.jpg" onclick="enlargeImg(this)"></div>
     <p>
         It is very easy to connect a NeoPixel to the ESP32. A 5 V pin provides power. A 1N4004 diode is used to drop the
         voltage from 5 V to 4.3 V which allows the NeoPixel to read the ESP32’s 3.3 V output. The ESP32 3.3 V data
@@ -232,7 +177,7 @@ Hello World
         if you want to run a strip of LED’s, please use an external power source to avoid damaging the board and it
         would be preferable to use a level shifter on the data line instead of the diode approach.
     </p>
-    <div class="img"><img src="images/neon led/4.png"></div>
+    <div class="img"><img src="images/neon led/4.png" onclick="enlargeImg(this)"></div>
     <p>
         Here’s the MicroPython code to control the NeoPixel. The Pin library is very similar to the Raspberry Pi GPIO
         library. It lets you reference and control the ESP32 GPIO pins. The NeoPixel library drives NeoPixel LED’s and
@@ -341,10 +286,12 @@ Type "help()" for more information.
 >>> import rgb
         </code></pre>
 
-    <div class="img"><img src="images/neon led/5.jpg"></div><br><bR>
+    <div class="img"><img src="images/neon led/5.jpg" onclick="enlargeImg(this)"></div><br><bR>
+    <a href="led_blink.html" class="original">Next</a>
     <footer>
         <a class="acenter" href="https://www.rototron.info/raspberry-pi-esp32-micropython-tutorial/">Resources</a>
     </footer>
+    <script src="assets/javascript.js"> </script>
 </body>
 
 </html>

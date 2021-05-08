@@ -1,0 +1,54 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED BLINK</title>
+    <link href="assets/style.css" type="text/css" rel="stylesheet">
+    <style>
+        img {
+            width: 75%;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>LED BLINK USE Raspberry Pi</h2>
+    <a class="original" href="https://www.raspberrypi.org/documentation/usage/gpio/">-- GPIO --</a>
+    <a class="original" href="https://www.ics.com/blog/control-raspberry-pi-gpio-pins-python">-- GPIO Control --</a>
+    <p>
+        1) connect -ve of led to pin 6 (ground)<br>
+        2) connect +ve of led to pin 8 (GPIO 14 TXD)
+    </p>
+    <div class="img"><img src="images/blink/01_Blinking-LED_bb-1024x777.jpg" onclick="enlargeImg(this)"></div>
+    <h3>code</h3>
+    <code><pre>
+
+import RPi.GPIO as GPIO
+import time
+        
+reset_pin = 8
+        
+        
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(reset_pin, GPIO.OUT)
+GPIO.output(reset_pin, GPIO.HIGH)
+        
+        
+time.sleep(1)
+GPIO.output(reset_pin , GPIO.LOW)
+    </pre></code>
+    <h3>Install rpi package</h3>
+
+    <pre>sudo pip3 install rpi</pre>
+
+    <footer>
+        <a class="acenter"
+            href="https://raspberrypihq.com/making-a-led-blink-using-the-raspberry-pi-and-python/">Resource</a>
+    </footer>
+
+    <script src="assets/javascript.js"> </script>
+</body>
+
+</html>
