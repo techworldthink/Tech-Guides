@@ -1,43 +1,51 @@
-.search-div{
-    animation: color-change1 3s infinite;
- 
+.search-div {
+  animation: color-change1 3s infinite;
 }
 @keyframes color-change1 {
-    0% { color: black;background-color: white; }
-    50% { color: white;background-color: black; }
-    100% { color: black;background-color: white; }
+  0% {
+    color: black;
+    background-color: white;
   }
-
-
-  input[type=text] {
-    width: 130px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+  50% {
+    color: white;
+    background-color: black;
   }
-  
-  /* When the input field gets focus, change its width to 100% */
-  input[type=text]:focus {
-    width: 100%;
+  100% {
+    color: black;
+    background-color: white;
   }
-  .table-bar{
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 1em;
-      width: 95%;
-      border: 1px solid;
-     
-  }
-  tr,td,th{
-    border: 1px solid black;
-  }
-th{
-  text-align: center;
-  color:red;
 }
-  .search-here{
-   margin: 0;
-  }
-.probs{
+
+input[type="text"] {
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type="text"]:focus {
+  width: 100%;
+}
+.table-bar {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  width: 95%;
+  border: 1px solid;
+}
+tr,
+td,
+th {
+  border: 1px solid black;
+}
+th {
+  text-align: center;
+  color: red;
+}
+.search-here {
+  margin: 0;
+}
+.probs {
   font-weight: bolder;
-  color:brown
+  color: brown;
 }
