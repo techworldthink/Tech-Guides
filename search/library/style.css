@@ -36,16 +36,12 @@ input[type="text"]:focus {
 tr,
 td,
 th {
-  border: 1px solid black;
+  border: 1px solid black !important;
 }
 th {
-  text-align: center;
-  color: red;
+  text-align: center !important;
+  color: red !important;
 }
 .search-here {
   margin: 0;
-}
-.probs {
-  font-weight: bolder;
-  color: brown;
 }
