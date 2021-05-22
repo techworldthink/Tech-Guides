@@ -40,33 +40,45 @@
             <th>PROBLEMS </th>
             <th>SOLUTIONS</th>
         </tr>
-        
-            <td class="probs"><b>rtc.h <br> webserver.h </b> <br> not found </td>
-            <td class="solus">First make sure you selected the right boared ! <br><br>
-                <b>Tools->Boared->ESP32Dev</b><br><br>
-                then install (is the same problem shown after selected esp32 boared) <br><br>
-                <b>Tools->Manage Libraries -> seach and install</b>
-            </td>
+
+        <td class="probs">rtc.h <br> webserver.h <br> not found </td>
+        <td class="solus">First make sure you selected the right boared ! <br><br>
+            <b>Tools->Boared->ESP32Dev</b><br><br>
+            then install (is the same problem shown after selected esp32 boared) <br><br>
+            <b>Tools->Manage Libraries -> seach and install</b>
+        </td>
         </tr>
         <tr></tr>
-            <td class="probs"><b>AutoConnect.h <br> NTPClinet.h </b> <br>not found </td>
-            <td class="solus"><b> Tools->Manage Libraries -> seach and install</b> </td>
+        <td class="probs">AutoConnect.h <br> NTPClinet.h  <br>not found </td>
+        <td class="solus"><b> Tools->Manage Libraries -> seach and install</b> </td>
 
         </tr>
         <tr>
-            <td class="probs"><b>Arduino 1.8.5</b> does not work after install
+            <td class="probs">Arduino 1.8.5 does not work after install
             </td>
             <td class="solus">
                 Running ./install.sh will actually break the source code so running ./arduino won't work anymore.<br>
                 Do not run install.sh.<br>
                 <br>
-                Run the program arduino by using this command after 'cd'ing into the correct directory: ./arduino   <br> 
+                Run the program arduino by using this command after 'cd'ing into the correct directory: ./arduino <br>
+            </td>
+        </tr>
+        <tr>
+            <td class="probs">How to install ESP32 Board in Arduino IDE ? </td>
+            <td class="solus">
+                1. Open your Arduino IDE, go to File>Preferences<br><br>
+                2. Put <a href="https://dl.espressif.com/dl/package_esp32_index.json">https://dl.espressif.com/dl/package_esp32_index.json</a> into the “Additional Board Manager URLs”
+                field as shown in the figure below. Then, click the “OK” button<br><br>
+                Note: if you already have another boards (i.e ESP8266 boards URL), you can separate the URLs with a comma.<br><br>
+                3. Then go to the Boards Manager. Go to Tools > Board > Boards Manager <br><br>
+                4. Go to the search bar and type ESP32 then install ESP32 by Espressif Systems<br><bR>
+                    5. Wait a few seconds then you've installed it<br>
             </td>
         </tr>
     </table>
 
 
-<br><br><br>
+    <br><br><br>
     <script src="library/script.js"></script>
 
 

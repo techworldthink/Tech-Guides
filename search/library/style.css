@@ -23,14 +23,21 @@
       margin-left: auto;
       margin-right: auto;
       margin-top: 1em;
-      width: 90%;
+      width: 95%;
       border: 1px solid;
      
   }
   tr,td,th{
-    border: 1px solid;
+    border: 1px solid black;
   }
-
+th{
+  text-align: center;
+  color:red;
+}
   .search-here{
    margin: 0;
   }
+.probs{
+  font-weight: bolder;
+  color:brown
+}
