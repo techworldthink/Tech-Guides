@@ -1,0 +1,138 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link href="library/style.css" type="text/css" rel="stylesheet">
+  <!--Google fonts-->
+  <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Asap Condensed' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Carme' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <title>Nmap</title>
+</head>
+
+<body>
+  <div class="container-fuid main-div">
+    <div class="content-pro">
+      <h3 class="text-center">Nmap <br> ( Network Mapper )</h3>
+      <svg height="210" width="100%">
+        <line x1="0" y1="0" x2="100%" y2="0" style="stroke:rgb(255,0,0);stroke-width:2" />
+      </svg>
+    </div>
+
+    <div class="content">
+      <h4 class="inner"><b class="red">[</b> root<b class="red">@</b>Solution<b class="red"> ]</b> :-</h4>
+      <svg height="210" width="50%">
+        <line x1="0" y1="0" x2="100%" y2="0" style="stroke:rgb(255,0,0);stroke-width:2" />
+      </svg>
+      <br>
+      <label>use[~]</label>
+      <ul>
+        <li>Open ports and services</li>
+        <li>Discover services along with their versions</li>
+        <li>Guess the operating system running on a target machine</li>
+        <li>Get accurate packet routes till the target machine</li>
+        <li>Monitoring hosts</li>
+      </ul>
+      <a href="data/images/nmap-mindmap-1.png" class="left-40"><i class="fa fa-picture-o" aria-hidden="true"></i> Image
+        of ALL Commands</a> <br>
+
+      <a href="data/pdf/nmap-mindmap.pdf" class="left-40"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF of ALL
+        Commands </a>
+      <br>
+      <dl>
+        <dt><b class="command">nmap target</b></dt><dd> &nbsp;&nbsp; - &nbsp;&nbsp;     scan a single system </dd><br>
+        <dt> <b class="command">nmap 192.168.1.1</b></dt><br>
+        <dt><b class="command">nmap target/cdir</b></dt><dd> &nbsp;&nbsp; - &nbsp;&nbsp;   scan the entire subnet </dd><br>
+        <dt><b class="command">eg: nmap 192.168.1.1/24</b></dt><br>
+        <dt><b class="command">nmap target target1 target2</b></dt><dd> &nbsp;&nbsp; - &nbsp;&nbsp;   scan a multiple targets </dd><br>
+      </dl>
+    </div>
+
+    <div class="content">
+      <h4 class="inner"><b class="red">[</b> root<b class="red">@</b>Details<b class="red"> ]</b> :-</h4>
+      <svg height="210" width="50%">
+        <line x1="0" y1="0" x2="100%" y2="0" style="stroke:rgb(255,0,0);stroke-width:2" />
+      </svg>
+      <table>
+        <tbody>
+          <tr class="text-center">
+            <th>No.</th>
+            <th>Methods</th>
+            <th>Positives</th>
+            <th>Negatives</th>
+            <th>Code</th>
+          </tr>
+          <tr>
+            <td class="text-center">1</td>
+            <td>TCP SYN Scan (-sS)</td>
+            <td> stealth scanning<br>Half-open scanning <br>Incomplete TCP handshake process <br> Nmap sends SYN packets <br> 
+              It does not create any sessions <br>The target computer can’t create any log </td>
+            <td>Requires the root/administrator privileged.</td>
+            <td># nmap -sS 192.168.1.1</td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td>
+            <td>TCP connect() Scan [-sT]</td>
+            <td>TCP three way handshake<br></td>
+            <td>Detect on the system being scanned.<br> Connection attempt being logged
+            <br>Log connections and their source IP<br>detect the source of a TCP connect()</td>
+            <td># nmap -sT 192.168.1.1</td>
+          </tr>
+          <tr>
+            <td class="text-center">3</td>
+            <td>UDP Scan (-sU)</td>
+            <td>Find an open UDP port<br>Reveal information about services or trojans which rely on UDP<br>
+              Microsoft do not limit the Port Unreachable error generation frequency 
+            <br></td>
+            <td>Not usually useful for most types of attack<br>firewall blocks outgoing ICMP Port Unreachable messages
+            <br>Most operating systems limit the number of ICMP Port Unreachable messages which can be generated in a certain time period, thus slowing the speed of a UDP scan</td>
+            <td># nmap -sU 192.168.1.1</td>
+          </tr>
+          <tr>
+            <td class="text-center">4</td>
+            <td>FIN, Null, Xmas Tree Scans [-sF, -sN, -sX]></td>
+            <td>Each scan type refers to the flags set in the TCP header<br>
+             </td>
+            <td></td>
+            <td>nmap -sS 127.0.0.1</td>
+          </tr>
+          <tr>
+            <td class="text-center"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="content">
+      <h4 class="inner"><b class="red">[</b> root<b class="red">@</b>Short hand<b class="red"> ]</b> :-</h4>
+      <svg height="210" width="50%">
+        <line x1="0" y1="0" x2="100%" y2="0" style="stroke:rgb(255,0,0);stroke-width:2" />
+      </svg>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+  <script src="library/javascript.js"></script>
+</body>
+
+</html>

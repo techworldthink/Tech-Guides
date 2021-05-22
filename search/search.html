@@ -1,0 +1,75 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="library/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- header-->
+    <header id="home">
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="images/banner.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="images/banner.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="images/banner.png" class="d-block w-100" alt="...">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="text-center search-div">
+        <h5 class="search-here">Search here</h5>
+    </div>
+
+    <input type="text" name="search" id="myInput" onkeyup="myFunction()" placeholder="Search.." class="search-bar">
+
+    <table id="myTable" class="table-bar" cellpadding="10px">
+        <tr class="header">
+            <th>PROBLEMS </th>
+            <th>SOLUTIONS</th>
+        </tr>
+        
+            <td class="probs"><b>rtc.h <br> webserver.h </b> <br> not found </td>
+            <td class="solus">First make sure you selected the right boared ! <br><br>
+                <b>Tools->Boared->ESP32Dev</b><br><br>
+                then install (is the same problem shown after selected esp32 boared) <br><br>
+                <b>Tools->Manage Libraries -> seach and install</b>
+            </td>
+        </tr>
+        <tr></tr>
+            <td class="probs"><b>AutoConnect.h <br> NTPClinet.h </b> <br>not found </td>
+            <td class="solus"><b> Tools->Manage Libraries -> seach and install</b> </td>
+
+        </tr>
+        <tr>
+            <td class="probs"><b>Arduino 1.8.5</b> does not work after install
+            </td>
+            <td class="solus">
+                Running ./install.sh will actually break the source code so running ./arduino won't work anymore.<br>
+                Do not run install.sh.<br>
+                <br>
+                Run the program arduino by using this command after 'cd'ing into the correct directory: ./arduino   <br> 
+            </td>
+        </tr>
+    </table>
+
+
+<br><br><br>
+    <script src="library/script.js"></script>
+
+
+</body>
+
+</html>

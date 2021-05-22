@@ -1,0 +1,106 @@
+body {
+  background-color: black;
+  background-image: url(../../images/bac.jpg);
+  background-attachment: scroll;
+  background-position: center;
+  background-repeat: space;
+  background-size: initial;
+  color: white;
+  font-family: "Asap Condensed";
+  font-size: 16px;
+}
+h3 {
+  font-family: "Asap Condensed";
+  font-size: 16px;
+  font-size: 22px;
+  padding-top: 1em;
+}
+h4 {
+  color: rgb(9, 237, 25);
+  font-family: "Aldrich";
+  font-size: 18px;
+  margin-top: 1em;
+}
+.content {
+  margin-left: 1em;
+}
+.main-div {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.red {
+  color: red;
+  font-weight: lighter;
+}
+svg {
+  height: 10;
+  margin-bottom: 1em;
+}
+.red-text {
+  color: red;
+  background-color: rgba(250, 250, 250, 1);
+  border-radius: 5px;
+  padding: 5px;
+}
+i {
+  color: cyan;
+  margin-right: 10px;
+}
+.left-40 {
+  margin-left: 40px;
+}
+a {
+  color: white;
+  animation: color-change1 3s infinite;
+  text-decoration: none;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: normal;
+}
+
+@keyframes color-change1 {
+  0% {
+    color: cyan;
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    color: cyan;
+  }
+}
+
+table {
+  padding: 1em;
+  width: 95%;
+
+}
+th {
+  font-weight: normal;
+  color: black;
+  background-color: white;
+}
+tr,td{
+    border: 1px solid;
+}
+td{
+    padding-left:5px;
+}
+dl {
+  margin-left: 25px;
+  margin-top: 10px;
+  font-weight: normal;
+}
+dt {
+  font-weight: normal;
+  font-size: 16px;
+  display: inline;
+  
+}
+dd {
+  display: inline;
+}
+.command {
+  background-color: yellow;
+  color: red;
+
+  font-weight: bold;
+}
