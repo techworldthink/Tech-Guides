@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIP SETUP</title>
+    <link href="assets/css/noip2.css" type="text/css" rel="stylesheet">
+    <style>
+        img {
+            width: 75%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+    <h2>How to Install the Linux Dynamic Update Client on Ubuntu (Noip2) & configurations</h2>
+    <a class="original" href="https://www.noip.com/support/knowledgebase/getting-started-with-no-ip-com/">--
+        CREATE ACCOUNT --</a>
+    <a class="original"
+        href="https://www.noip.com/support/knowledgebase/installing-the-linux-dynamic-update-client-on-ubuntu/">--
+        INSTALL --</a>
+    <a class="original"
+        href="https://telegra.ph/How-to-Install-the-Linux-Dynamic-Update-Client-on-Ubuntu-Noip2--configurations-06-04">--
+        TELEGRAPH --</a>
+
+    <h3>Use</h3>
+    <p>
+        Are you trying to set up a website, FTP server, mail server or any other type of online service? Do you want
+        people to be able to reach it via the Internet? Does your ISP only give you a dynamic IP address (one that
+        changes from time to time and is not static)? Here are a few simple steps to follow to get yourself set up and
+        online using No-IP’s free dynamic DNS service. This will allow you to run your servers at your home or business
+        without a static IP address.
+    </p>
+    <h3>Install</h3>
+    <ol>
+        <li>cd /usr/local/src/ </li>
+        <li>wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz </li>
+        <li>tar xf noip-duc-linux.tar.gz </li>
+        <li>cd noip-2.1.9-1/ </li>
+        <li>make install </li>
+        <li>/usr/local/bin/noip2 -C </li>
+    </ol>
+
+    <h3>Configure & Test</h3>
+    <ul>
+        <li>To run Noip2 (sudo /usr/local/bin/noip2 ) OR (sudo noip2) </li>
+        <li>Add to cronjob for autorestart </li>
+        <ol>
+            <li>open terminal and type it ( crontab -e ) </li>
+            <li>add this line (@reboot sudo /usr/local/bin/noip2) </li>
+            <li>save and exit </li>
+        </ol>
+        <li>Test its working or not </li>
+        <ol>
+            <li>set a demo ip (noip2 -i 103.34.43.34) </li>
+            <li>ping your_domain_name </li>
+            <li>if you got 103.34.43.34 then its working </li>
+        </ol>
+    </ul>
+
+</div>
+<br><br>
+    <footer>
+        <a class="acenter" href="https://www.noip.com/support/knowledgebase/getting-started-with-no-ip-com/">Resource</a>
+    </footer>
+
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>

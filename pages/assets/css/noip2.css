@@ -1,0 +1,85 @@
+@media only screen and (min-width: 769px) {
+  .body {
+    padding: 2em;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .body {
+    padding: 4em;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .body {
+    padding: 1em;
+  }
+}
+
+body,html{
+  padding:0;
+  margin: 0;
+}
+footer {
+  position: fixed;
+  bottom: 0%;
+  background-color: black;
+  margin-top: 3em;
+  width:100%;
+}
+
+h2 {
+  text-align: center;
+  color: rgb(83, 33, 10);
+  border-bottom: 2px solid darkgray;
+  padding: 10px;
+  margin-top: 1em;
+  font-size: 25px;
+  text-transform: uppercase;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.acenter {
+  text-align: center;
+  display: block;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  width:100%;
+}
+
+.original {
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  padding: 5px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color:red;
+}
+
+body {
+  /*background-image: linear-gradient(to right, #73c8a9, #373b44);*/
+  /*background-image: linear-gradient(to right,#360033,#0b8793);
+       */
+  /* background-image: linear-gradient(to right,#ffa17f,#00223e);*/
+  /*background-image: linear-gradient(to right, #2bc0e4, #eaecc6);*/
+}
+
+
+ul,ol{
+  font-family: CustomSerif,Georgia,Cambria,'Times New Roman',serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.58;
+  color: rgba(0,0,0,.8);
+}
+
+p{
+  font-family: CustomSerif,Georgia,Cambria,'Times New Roman',serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.58;
+  color: rgba(0,0,0,.8);
+}
+
