@@ -76,6 +76,23 @@
                     5. Wait a few seconds then you've installed it<br>
             </td>
         </tr>
+        <tr>
+            <td class="probs">NO SPACE LEFT ON DEVICE ERROR (LINUX) - XVDA1 IS 100% FULL, WHAT IS IT? HOW TO FIX? </td>
+            <td class="solus">
+                <b>Find Which File cause this size issue</b><br>
+                $ df -h - (filesystem with sapce used and avilable)<br>
+                $ sudo du -shx /* | sort -h (to find which file is large)<br>
+                $ sudo du -shx /usr/* | sort -h<br>
+               <b> Delete Log files</b><br>
+                sudo -i<br>
+                echo "" > /var/log/kern.log<br>
+                echo "" > /var/log/syslog<br>
+                echo "" > /var/log/debug<br>
+                service syslog restart<br>
+                journalctl --vacuum-size=50M<br><br>
+                <a href="../index.html">For more info</a>
+            </td>
+            </tr>
     </table>
 
 
