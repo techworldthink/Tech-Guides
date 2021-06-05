@@ -1,0 +1,71 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIP SETUP</title>
+    <link href="assets/css/noip2.css" type="text/css" rel="stylesheet">
+    <style>
+        img {
+            width: 75%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2>No Space Left On Device Error (Linux) - xvda1 is 100% full, What is it? how to fix?</h2>
+        <a class="original"
+            href="https://www.howtogeek.com/409611/how-to-view-free-disk-space-and-disk-usage-from-the-linux-terminal/">--
+            FILE SIZE COMMANDS --</a>
+        <a class="original" href="https://blog.devgenius.io/ec2-no-space-left-on-device-error-539fac18ac24">--
+            SOLUTION --</a>
+        <a class="original" href="https://telegra.ph/NO-SPACE-LEFT-ON-DEVICE-ERROR-LINUX---XVDA1-IS-100-FULL-WHAT-IS-IT-HOW-TO-FIX-06-05">--
+            TELEGRAPH --</a>
+
+        <h3>Use</h3>
+        <p>
+            You are on a Xen VPS(or virtual machine); xvd* are simply the Xen disk storage devices (Xen Virtual block
+            Device). They appear instead of sda, etc. when you are using the more efficient paravirtualized Xen disk
+            drivers instead of straight-up SCSI disk emulation. If you list the installed modules (drivers) on a Xen
+            HVM, this driver will show as blkfront (or xen_blk if you are running on a very old Xen version--pretty
+            rare).
+        </p>
+        <h3>How to View Free Disk Space and Disk Usage From the Linux Terminal</h3>
+        <ol>
+            <li>$ df </li>
+            <li>$ df -BM (K, M, G, T, P, E, Z or Y - Block sizes )</li>
+            <li>$ df -h (Human readable) </li>
+            
+        </ol>
+        <h3>Find Which File cause this size issue</h3>
+        <ol>
+            <li>$ df -h  - (filesystem with sapce used and avilable) </li>
+            <li>$ sudo du -shx /* | sort -h  (to find which file is large)</li>
+            <li>$ sudo du -shx /usr/* | sort -h </li>
+            
+        </ol>
+
+        <h3>Delete Log files</h3>
+        <ul>
+            <li>sudo -i </li>
+            <li>echo "" > /var/log/kern.log </li>
+            <li>echo "" > /var/log/syslog </li>
+            <li>echo "" > /var/log/debug</li>
+            <li>service syslog restart </li>
+            <li>journalctl --vacuum-size=50M </li>
+            
+        </ul>
+
+    </div>
+    <br><br>
+    <footer>
+        <a class="acenter"
+            href="https://telegra.ph/NO-SPACE-LEFT-ON-DEVICE-ERROR-LINUX---XVDA1-IS-100-FULL-WHAT-IS-IT-HOW-TO-FIX-06-05">Resource</a>
+    </footer>
+
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>
