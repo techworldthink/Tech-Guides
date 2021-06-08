@@ -1,0 +1,99 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting up an NGINX web server on a Raspberry Pi</title>
+    <link href="assets/css/noip2.css" type="text/css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e6e2dd;
+            padding:1em;
+        }
+
+        img {
+            width: 75%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h2 {
+            background-color: #008375;
+            color: white;
+            font-weight: 100;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        pre,
+        code {
+            color: #ccc;
+            background: none;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 1em;
+            text-align: left;
+            white-space: pre;
+
+            margin: 0.5em 0;
+            overflow: auto;
+            background: #2d2d2d;
+        }
+
+        pre code {
+            background: transparent;
+            border: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2>Setting up an NGINX web server on a Raspberry Pi</h2>
+        <a class="original" href="https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md">--
+            PI Forum --</a>
+        <p>
+            NGINX (pronounced engine x) is a popular lightweight web server application you can install on the Raspberry
+            Pi to allow it to serve web pages.<br><br>
+
+            Like Apache, NGINX can serve HTML files over HTTP, and with additional modules can serve dynamic web pages
+            using scripting languages such as PHP.
+        </p>
+
+        <h3>Refresh database of available packages</h3>
+        <pre><code>
+            sudo apt update
+        </pre></code>
+        <h3>Install NGINX </h3>
+        <p>First install the nginx package by typing the following command in to the Terminal:</p>
+        <pre><code>
+            sudo apt install nginx
+        </pre></code>
+        <p>and start the server with:</p>
+        <pre><code>
+            sudo /etc/init.d/nginx start
+        </pre></code>
+        <h3>Test the web server</h3>
+        <p>By default, NGINX puts a test HTML file in the web folder. This default web page is served when you browse to
+            http://localhost/ on the Pi itself, or http://192.168.1.10 (whatever the Pi's IP address is) from another
+            computer on the network. To find the Pi's IP address, type hostname -I at the command line (or read more
+            about finding your IP address).</p>
+
+
+    </div>
+    <br><br>
+    <footer>
+        <a class="acenter" href="">LearnToday</a>
+    </footer>
+
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>
