@@ -50,6 +50,7 @@
             background: transparent;
             border: 0;
             padding: 0;
+            color:orange;
         }
     </style>
 </head>
@@ -85,6 +86,36 @@
             http://localhost/ on the Pi itself, or http://192.168.1.10 (whatever the Pi's IP address is) from another
             computer on the network. To find the Pi's IP address, type hostname -I at the command line (or read more
             about finding your IP address).</p>
+
+            <pre><code>
+                sudo systemctl restart nginx
+                sudo service nginx restart
+                sudo /etc/init.d/nginx restart
+
+                sudo systemctl start nginx 
+                sudo systemctl stop nginx 
+                sudo systemctl restart nginx
+
+                sudo service nginx start
+                sudo service nginx stop
+                sudo service nginx restart
+
+                sudo /etc/init.d/nginx start
+                sudo /etc/init.d/nginx stop
+                sudo /etc/init.d/nginx restart
+
+                sudo service status nginx   # status
+                sudo systemctl status nginx
+
+                sudo nginx -s reload
+                sudo systemctl reload nginx
+                sudo service nginx reload
+
+                nginx -t -c /etc/nginx/nginx.conf  # to check config file ok?
+                systemctl enable nginx             # to enable
+                nginx -t                           # to check config ok?
+                tail -f /var/log/nginx/error.log   # to see log 
+            </pre></code>
 
 
     </div>
