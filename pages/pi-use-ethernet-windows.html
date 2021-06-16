@@ -1,0 +1,103 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Connection Sharing</title>
+    <link href="assets/css/noip2.css" type="text/css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e6e2dd;
+            padding: 1em;
+        }
+
+        img {
+            width: 75%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h2 {
+            background-color: #008375;
+            color: white;
+            font-weight: 100;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        pre,
+        code {
+            color: #ccc;
+            background: none;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 1em;
+            text-align: left;
+            white-space: pre;
+
+            margin: 0.5em 0;
+            overflow: auto;
+            background: #2d2d2d;
+        }
+
+        pre code {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2>Connect your Raspberry Pi to your computer via Ethernet (or How to Use Internet Connection Sharing on
+            Windows 10)</h2>
+        <a class="original"
+            href="https://medium.com/@jrcharney/connect-your-raspberry-pi-to-your-computer-via-ethernet-4564e1e68922">--
+            Resource--</a>
+        <h3>Requirements</h3>
+        <ul>
+            <li>RJ45 Cable</li>
+            <li>Wifi Adapter</li>
+            <li>Pi</li>
+            <li>Windows 10 machine</li>
+            <li>Hotspot (i use mobile Hotspot)</li>
+        </ul>
+        <h3>Steps</h3>
+        <ol>
+            <li>Connect Wi-Fi adapter to windows PC. Then connect to internet.</li>
+            <li>Connect your Raspberry Pi using the PC Ethernet Port using a straight Ethernet Cable. </li>
+            <li>Open Network and Sharing Center ... </li>
+            <li>Open Wi-Fi Properties ...</li>
+            <li> In the “Wi-Fi Properties” window, click the “Sharing” tab. Check the box for “Allow other network users
+                to connect through this computer’s Internet connection”. In the drop down menu below it, select the
+                Ethernet connection. You’ll also want to check the box for “Allow others network users to
+                control or disable the shared Internet connection”. Click “OK” .
+            </li>
+            <li>
+                Open your Ethernet connection properties. 
+            </li>
+            <li>Double click on "Internet Protocol Version 4 (TCP/IPv4)"</li>
+            <li> Set -> IP : 192.168.137.1 (may be VirtualBox use this IP then choose 192.168.137.2 )</li>
+            <li>Set -> Subnet Mask : 255.255.255.0.</li>
+            <li>Its Ok Now! </li>
+        </ol>
+
+
+    </div>
+    <br><br>
+    <footer>
+        <a class="acenter" href="">LearnToday</a>
+    </footer>
+
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>
