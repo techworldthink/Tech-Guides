@@ -1,0 +1,164 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install LAMP in Ubuntu</title>
+    <link href="assets/css/noip2.css" type="text/css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e6e2dd;
+            padding: 1em;
+        }
+
+        img {
+            width: 75%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h2 {
+            background-color: #008375;
+            color: white;
+            font-weight: 100;
+
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            text-transform: none;
+            font-family: cursive;
+            background-color: white;
+            border-left: 2px solid #c61e4a;
+            padding-left: .5em;
+            margin-top: 3em;
+        }
+
+        pre,
+        code {
+            color: #ccc;
+            background: none;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 1em;
+            text-align: left;
+            white-space: pre;
+
+            margin: 0.5em 0;
+            overflow: auto;
+            background: #2d2d2d;
+        }
+
+        pre code {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            color: orange;
+        }
+
+        b {
+            font-family: cursive;
+            font-size: 15px;
+            margin-top: 2em;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2>Install LAMP in Ubuntu</h2>
+        <a class="original" href="">--Resource --</a>
+
+        <h3>Install Apache2</h3>
+        <b>Update your system:</b>
+        <pre><code>
+    sudo apt update
+    </pre></code>
+        <b>Install Apache using apt:</b>
+        <pre><code>
+    sudo apt install apache2
+    </pre></code>
+        <b>Confirm that Apache is now running with the following command:</b>
+        <pre><code>
+    sudo systemctl status apache2
+    </pre></code>
+        <b>If it is not working !</b>
+        <pre><code>
+    sudo systemctl stop apache2  # to stop if running
+    sudo systemctl start apache2 # to start if not running
+    </pre></code>
+    <b>Once installed, test by accessing your server’s IP in your browser:</b>
+    <pre><code>
+    http://127.0.0.1/
+    http://localhost/
+    </pre></code>
+
+    <h3>Install mariadb</h3>
+    
+    <pre><code>
+    sudo apt install mariadb-server mariadb-client
+
+    sudo systemctl status mysql     # to check status
+
+    sudo systemctl start mysq       # if not running
+
+    sudo mysql_secure_installation  # Secure your newly installed MariaDB servic
+    </pre></code>
+    
+    <h3>Install PHP and commonly used modules </h3>
+    <pre><code>
+    sudo apt install php libapache2-mod-php php-opcache php-cli php-gd php-curl php-mysql 
+
+    sudo systemctl restart apache2
+    </pre></code>
+    <b>Test PHP Processing on Web Server </b>
+    <pre><code>
+    sudo nano /var/www/html/info.php
+        </pre></code>
+    <b> Inside the file, type in the valid PHP code:</b>
+        <pre><code>
+    &lt;?php
+        phpinfo ();
+    ?&gt;
+        </code></pre>
+        <b>Press CTRL + X to save and close the file. Press y and ENTER to confirm <br>Open a browser and type in your IP address/phpinfo.php</b>
+        <pre><code>
+     http://127.0.0.1/phpinfo.php
+        </code></pre>
+        <h3>Install phpmyadmin</h3>
+        <pre><code>
+    sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+
+    sudo systemctl restart apache2
+        </code></pre>
+        <b>Open a browser  :   http://localhost/phpmyadmin <br> username : root <br> password : yourpassword </b>
+ <b>If phpmyadmin page not found : </b>
+    <pre><code>
+    nano /etc/apache2/apache2.conf
+    </code></pre>
+    <b>Add this line to last of the file.<br>Press CTRL + X to save and close the file. Press y and ENTER to confirm  </b>
+    <pre><code>
+    Include /etc/phpmyadmin/apache.conf
+    </code></pre>
+    <b>restart apache2 - now try : http://localhost/phpmyadmin</b>
+    <pre><code>
+    sudo systemctl restart apache2
+    </code></pre>
+    <b>If any problem for login  run the following command</b>
+    <pre><code>
+    sudo mysql   ALTER USER root@localhost IDENTIFIED  BY “yourpassword”;
+    </code></pre>
+    </div>
+    <br><br>
+    <footer>
+        <a class="acenter" href="">LearnToday</a>
+    </footer>
+
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>
