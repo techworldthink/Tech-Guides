@@ -1,0 +1,234 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 BOT</title>
+
+    <style>
+        body {
+            padding-left: 1em;
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            color: green;
+            border-bottom: 1px solid gray;
+            padding-bottom: 1em;
+        }
+
+        h2 {
+            color: gray;
+            font-weight: 100;
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            text-transform: none;
+            background-color: white;
+            border-left: 2px solid #c61e4a;
+            padding-left: .5em;
+            margin-top: 3em;
+        }
+
+        pre,
+        code {
+            color: #ccc;
+            background: none;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 1em;
+            text-align: left;
+            white-space: pre;
+
+            margin: 0.5em 0;
+            overflow: auto;
+            background: white;
+        }
+
+        pre code {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            color: red;
+        }
+
+        b,
+        p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 21px;
+            margin-top: 2em;
+            display: block;
+            color: gray;
+            font-weight: 100;
+        }
+
+        i {
+            color: gray;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .pink {
+            color: #363434;
+            background-color: #27272740;
+            display: block;
+            width: fit-content;
+        }
+
+        .left {
+            text-align: left;
+            text-decoration: none;
+            border: none;
+            padding: 0;
+            margin: 0%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2>ESP32 BOT</h2>
+        <a class="original" href="https://iotdesignpro.com/projects/telegram-bot-with-esp32-control-gpio-pins-through-telegram-chat">--Resource
+            --</a>
+
+        <h3>1. Create a bot</h3>
+        <pre><code>
+<i># Open this bot in telegram</i><a class="left" href="https://telegram.me/botfather">https://telegram.me/botfather</a>
+<i># give the commands</i>
+
+/start
+
+/newbot
+
+<i># give a name to your bot</i>
+<i># you will get a token . SAVE IT!</i>
+
+<i># Get your Telegram chat id</i><a class="left" href="https://telegram.me/botfather">https://t.me/myidbot</a>
+
+<i># give the commands</i>
+<i># you will get an id . SAVE IT!</i>
+
+/getid
+
+</code></pre>
+
+<h3>2. ESP32 Code</h3>
+<pre><code style="color:black">
+#include &lt; WiFi.h &gt;
+    #include &lt; WiFiClientSecure.h&gt;
+    #include &lt; UniversalTelegramBot.h&gt;
+    #include &lt; ArduinoJson.h&gt;
+    
+    // Replace with your network credentials
+    const char* ssid = "Your WiFi Name";
+    const char* password = "Your WiFi Password";
+    
+    // your Bot Token (Get from Botfather)
+    #define BOTtoken "BOT Token got from BotFather"
+    #define CHAT_ID "Your chat id from IdBot"
+    
+    WiFiClientSecure client;
+    UniversalTelegramBot bot(BOTtoken, client);
+    
+    int botRequestDelay = 1000;
+    unsigned long lastTimeBotRan;
+    const int ledPin = 2;
+    bool ledState = LOW;
+    
+    void handleNewMessages(int numNewMessages) {
+      Serial.println("handleNewMessages");
+      Serial.println(String(numNewMessages));
+      for (int i = 0; i &lt; numNewMessages; i++) {
+        String chat_id = String(bot.messages[i].chat_id);
+        if (chat_id != CHAT_ID) {
+          bot.sendMessage(chat_id, "Unauthorized user", "");
+          continue;
+        }
+        // Print the received message
+        String text = bot.messages[i].text;
+        Serial.println(text);
+        String from_name = bot.messages[i].from_name;
+        if (text == "/start") {
+          String welcome = "Welcome, " + from_name + ".\n";
+          welcome += "Use the following commands to control your outputs.\n\n";
+          welcome += "/led_on to turn GPIO ON \n";
+          welcome += "/led_off to turn GPIO OFF \n";
+          welcome += "/state to request current GPIO state \n";
+          bot.sendMessage(chat_id, welcome, "");
+        }
+        if (text == "/led_on") {
+          bot.sendMessage(chat_id, "LED state set to ON", "");
+          ledState = HIGH;
+          digitalWrite(ledPin, ledState);
+        }
+        if (text == "/led_off") {
+          bot.sendMessage(chat_id, "LED state set to OFF", "");
+          ledState = LOW;
+          digitalWrite(ledPin, ledState);
+        }
+        if (text == "/state") {
+          if (digitalRead(ledPin)) {
+            bot.sendMessage(chat_id, "LED is ON", "");
+          }
+          else {
+            bot.sendMessage(chat_id, "LED is OFF", "");
+          }
+        }
+      }
+    }
+    
+    void setup() {
+      Serial.begin(115200);
+      pinMode(ledPin, OUTPUT);
+      digitalWrite(ledPin, ledState);
+      WiFi.mode(WIFI_STA);
+      WiFi.begin(ssid, password);
+      WiFi.setSleep(false);
+      while (WiFi.status() != WL_CONNECTED) {
+        delay(1000);
+        Serial.println("Connecting to WiFi..");
+      }
+      Serial.println(WiFi.localIP());
+      client.setInsecure();
+    }
+    
+    void loop() {
+      if (millis() > lastTimeBotRan + botRequestDelay)  {
+        int numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+        while (numNewMessages) {
+          Serial.println("got response");
+          handleNewMessages(numNewMessages);
+          numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+        }
+        lastTimeBotRan = millis();
+      }
+    }
+
+
+</code></pre>
+
+<h3>3. Use this commands in your Bot</h3>
+<pre><code>
+/start
+
+/led_on
+
+/led_off
+
+/state
+</code></pre>   
+</div>
+
+    <br><br>
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>
