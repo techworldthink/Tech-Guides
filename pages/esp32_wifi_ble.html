@@ -1,0 +1,169 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to switch between bluetooth and wifi in esp32</title>
+
+    <style>
+        body {
+            padding-left: 1em;
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            color: green;
+            border-bottom: 1px solid gray;
+            padding-bottom: 1em;
+        }
+
+        h2 {
+            color: gray;
+            font-weight: 100;
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            text-transform: none;
+            background-color: white;
+            border-left: 2px solid #c61e4a;
+            padding-left: .5em;
+            margin-top: 3em;
+        }
+
+        pre,
+        code {
+            color: #ccc;
+            background: none;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 1em;
+            text-align: left;
+            white-space: pre;
+
+            margin: 0.5em 0;
+            overflow: auto;
+            background: white;
+        }
+
+        pre code {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            color: red;
+        }
+
+        b,
+        p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 21px;
+            margin-top: 2em;
+            display: block;
+            color: gray;
+            font-weight: 100;
+        }
+
+        i {
+            color: gray;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .pink {
+            color: #363434;
+            background-color: #27272740;
+            display: block;
+            width: fit-content;
+        }
+
+        .left {
+            text-align: left;
+            text-decoration: none;
+            border: none;
+            padding: 0;
+            margin: 0%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2>How to switch between Bluetooth and WiFi in ESP32</h2>
+        <a class="original" href="">--Resource
+            --</a>
+
+
+<h3>ESP32 Code</h3>
+<pre><code style="color:black">
+  #include &lt; WiFi.h &gt;
+  #include "BluetoothSerial.h"
+  
+  const char* ssid     = "WiFi Name";
+  const char* password = "WiFi Password";
+  
+  #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
+  #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
+  #endif
+  BluetoothSerial SerialBT;
+  
+  void turn_ON_WIFI() {
+    Serial.println("WIFI ON");
+    WiFi.begin(ssid, password);
+    delay(2000);
+  }
+
+  void turn_OFF_WIFI() {
+    Serial.println("WIFI OFF");
+    WiFi.mode( WIFI_MODE_NULL );
+    delay(2000);
+  }
+
+  void turn_ON_BLE() {
+    Serial.println("BLE ON");
+    SerialBT.begin("ESP32test");
+    delay(2000);
+  }
+  
+  void turn_OFF_BLE() {
+    Serial.println("BLE OFF");
+    btStop();
+    delay(2000);
+  }
+  
+  void setup() {
+    Serial.begin(115200);
+  }
+  
+  void loop() {
+
+    turn_ON_BLE();
+    delay(30000);
+
+    turn_OFF_BLE();
+    delay(30000);
+
+    turn_ON_WIFI();
+    delay(30000);
+
+    turn_OFF_WIFI();
+    delay(30000);
+
+  }
+  
+</code></pre>
+
+   
+</div>
+
+    <br><br>
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>
