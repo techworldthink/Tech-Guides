@@ -93,31 +93,43 @@
 
         <h3>Install</h3>
         <pre><code>
-<i># Download file</i>
-wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
+    <i># Download file</i>
+    wget https://www.goodsync.com/download/goodsync-linux-x86_64-release.run
 
-<i># Once downloaded, ensure that you grant the installer execution permissions</i>
-chmod +x goodsync-linux-x86_64-release.run
+    <i># Once downloaded, ensure that you grant the installer execution permissions</i>
+    chmod +x goodsync-linux-x86_64-release.run
 
-<i># Run the downloaded installer (Give Y to all)</i>
-./goodsync-linux-x86_64-release.run
+    <i># Run the downloaded installer (Give Y to all)</i>
+    ./goodsync-linux-x86_64-release.run
 
-<i># To confirm if the installation is configured correctly for activation, run the following command 
-You should see entries for "0.0.0.0:33333" and "0.0.0.0:11000".
-If you see entries for "127.0.0.1:33333" and "127.0.0.1:11000",
-the installation was not configured successfully.
-</i>
-netstat -plnt
+    <i># To confirm if the installation is configured correctly for activation, run the following command 
+    You should see entries for "0.0.0.0:33333" and "0.0.0.0:11000".
+    If you see entries for "127.0.0.1:33333" and "127.0.0.1:11000",
+    the installation was not configured successfully.
+    </i>
+    netstat -plnt
 
-<i>#  Next, enter the following command to enroll your GoodSync account to this device (replace with your email)</i>
-gsync /gs-account-enroll=email@domain.com
+    <i>#  Next, enter the following command to enroll your GoodSync account to this device (replace with your email)</i>
+    gsync /gs-account-enroll=email@domain.com
 
-<i># activate </i>
-gsync /activate
+    <i># activate </i>
+    gsync /activate
 
-gsync /version
+    gsync /version
         </code></pre>
-        
+<h3>Use</h3>
+    <pre><code>
+    <i>Create a job use windows machine</i>
+
+    <i>Sync jobs from Linux</i>
+    sudo gsync /sync-jobs-accts
+
+    <i>Analyze from Linux</i>
+    sudo gsync analyze /all
+
+    <i>Sync from Linux</i>
+    sudo gsync sync /all
+    </code></pre>   
     
     </div>
 
