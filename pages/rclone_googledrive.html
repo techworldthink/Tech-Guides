@@ -108,7 +108,7 @@
 <h3>2. Config</h3>
 <pre><code style="color:orange">
     rclone config
-    <i># craete job named "sync_google_drive"</i>
+    <i># create job named "sync_google_drive"</i>
     <i>Create a folder in google drive named "my_backup_folder"</i>
 
 </code></pre>
@@ -123,7 +123,7 @@
     nano sync_to_drive.sh
 
     <i>Paste following script inside sync_to_drive.sh file </i>
-    /usr/bin/rclone copy --update --verbose --transfers 30 --checkers 8 --contimeout 60s --timeout 300s --retries 3 --low-level-retries 10 --stats 1s "/home/pi/TEMPERORY" "sync_google_drive:my_backup_f0lder"
+    /usr/bin/rclone copy --update --verbose --transfers 30 --checkers 8 --contimeout 60s --timeout 300s --retries 3 --low-level-retries 10 --stats 1s "/home/pi/TEMPERORY" "sync_google_drive:my_backup_folder"
 
 </code></pre>
 
