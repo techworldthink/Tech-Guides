@@ -127,11 +127,8 @@
         <h2>Installing MQTT Broker(Mosquitto) on Raspberry Pi</h2>
         <a class="original" href="https://www.catchpoint.com/network-admin-guide/mqtt-broker">--Resource
             --</a><br>
-        <a class="original" href="https://techtutorialsx.com/2017/04/09/esp8266-connecting-to-mqtt-broker/">--Resource
-            --</a>
-        <a class="original"
-            href="https://www.vultr.com/docs/how-to-install-mosquitto-mqtt-broker-server-on-ubuntu-16-04">--Resource
-            --</a>
+            <a class="original" href="https://techtutorialsx.com/2017/04/09/esp8266-connecting-to-mqtt-broker/">--Resource
+                --</a>
         <p>
             <b class="pheads">MQTT (MQ Telemetry Transport)</b>
         </p>
@@ -172,13 +169,13 @@ mosquitto_sub -h 192.168.1.4 -t sample_topic_name
 mosquitto_pub -h 192.168.1.4 -t sample_topic_name -m "Hi this is test message"
 </code></pre>
 
-        <h3>2.2 Setup Authentication</h3>
-        <pre><code>
+<h3>2.2 Setup Authentication</h3>
+<pre><code>
 sudo mosquitto_passwd -c /etc/mosquitto/passwd your_username
 </code></pre>
 
-        <h3>2.2 Use (with authentication)</h3>
-        <pre><code>
+<h3>2.2 Use (with authentication)</h3>
+<pre><code>
 <i>192.168.1.4 (IP of Raspberry Pi)</i>
 
 <i>Open a Terminal and type it...</i>
@@ -188,21 +185,21 @@ mosquitto_sub -t "topic" -u "your_username" -P "your_password"
 mosquitto_pub -t "topic" -m "message from mosquitto_pub client" -u "your_username" -P "your_password"
 </code></pre>
 
-        <h3>3.Usefull commands</h3>
-        <pre><code>
+<h3>3.Usefull commands</h3>
+<pre><code>
 sudo systemctl status mosquitto
 sudo systemctl start mosquitto
 sudo systemctl restart mosquitto
 sudo systemctl stop mosquitto
 </code></pre>
 
-        <h3>4.Configuration file</h3>
-        <pre><code>
+<h3>4.Configuration file</h3>
+<pre><code>
 sudo nano /etc/mosquitto/mosquitto.conf
 </code></pre>
 
-        <h3>4.1.Configuration file Content</h3>
-        <pre><code>
+<h3>4.1.Configuration file Content</h3>
+<pre><code>
     ##### CONFIGURATIOS (AUTHENTICATION NOT NEEDED) ######
 
     listener 1883
@@ -234,6 +231,76 @@ sudo nano /etc/mosquitto/mosquitto.conf
     password_file /etc/mosquitto/passwd
 </code></pre>
 
+<h3>3. ESP32 code</h3>
+<pre><code>
+    #include &lt;ESP8266WiFi.h&gt;
+    #include &lt;PubSubClient.h&gt;
+         
+        const char* ssid = "YourNetworkName";
+        const char* password =  "YourNetworkPassword";
+        const char* mqttServer = "m11.cloudmqtt.com";
+        const int mqttPort = 12948;
+        const char* mqttUser = "YourMqttUser";
+        const char* mqttPassword = "YourMqttUserPassword";
+         
+        WiFiClient espClient;
+        PubSubClient client(espClient);
+         
+        void setup() {
+         
+          Serial.begin(115200);
+         
+          WiFi.begin(ssid, password);
+         
+          while (WiFi.status() != WL_CONNECTED) {
+            delay(500);
+            Serial.println("Connecting to WiFi..");
+          }
+          Serial.println("Connected to the WiFi network");
+         
+          client.setServer(mqttServer, mqttPort);
+          client.setCallback(callback);
+         
+          while (!client.connected()) {
+            Serial.println("Connecting to MQTT...");
+         
+            if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
+         
+              Serial.println("connected");  
+         
+            } else {
+         
+              Serial.print("failed with state ");
+              Serial.print(client.state());
+              delay(2000);
+         
+            }
+          }
+         
+          client.publish("esp/test", "Hello from ESP8266");
+          client.subscribe("esp/test");
+         
+        }
+         
+        void callback(char* topic, byte* payload, unsigned int length) {
+         
+          Serial.print("Message arrived in topic: ");
+          Serial.println(topic);
+         
+          Serial.print("Message:");
+          for (int i = 0; i &lt; length; i++) {
+            Serial.print((char)payload[i]);
+          }
+         
+          Serial.println();
+          Serial.println("-----------------------");
+         
+        }
+         
+        void loop() {
+          client.loop();
+        }
+</code></pre>
 
 
     </div>
