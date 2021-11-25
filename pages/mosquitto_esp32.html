@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mosquitto</title>
+    <title>mosquitto_esp32</title>
 
     <style>
         body {
@@ -124,114 +124,12 @@
 
 <body>
     <div class="body">
-        <h2>Installing MQTT Broker(Mosquitto) on Raspberry Pi</h2>
-        <a class="original" href="https://www.catchpoint.com/network-admin-guide/mqtt-broker">--Resource
-            --</a><br>
-            <a class="original" href="https://techtutorialsx.com/2017/04/09/esp8266-connecting-to-mqtt-broker/">--Resource
-                --</a>
-        <p>
-            <b class="pheads">MQTT (MQ Telemetry Transport)</b>
-        </p>
-        <p>
-            MQTT is a lightweight, publish-subscribe network protocol that transports messages between devices. The
-            protocol usually runs over TCP/IP, however, any network protocol that provides ordered, lossless,
-            bi-directional connections can support MQTT.
-        </p>
+        <h2>MQTT Broker(Mosquitto) - ESP32 </h2>
+        <a class="original" href="">--Resource
+            --</a>
 
-        <div class="img"><img src="images/mqtt/MQTT_Schema_EN.jpg"></div>
-        <p>
-            An MQTT broker is an intermediary entity that enables MQTT clients to communicate. Specifically, an MQTT
-            broker receives messages published by clients, filters the messages by topic, and distributes them to
-            subscribers.
 
-        </p>
-
-        <h3>0.Remove</h3>
-        <pre><code>
-sudo apt remove mosquitto
-sudo apt remove mosquitto-clients
-</code></pre>
-
-        <h3>1.Install</h3>
-        <pre><code>
-apt-get install mosquitto
-apt-get install mosquitto-clients
-</code></pre>
-
-        <h3>2.0 Use (without authentication)</h3>
-        <pre><code>
-<i>192.168.1.4 (IP of Raspberry Pi)</i>
-
-<i>Open a Terminal and type it...</i>
-mosquitto_sub -h 192.168.1.4 -t sample_topic_name
-
-<i>Open another Terminal and type it...</i>
-mosquitto_pub -h 192.168.1.4 -t sample_topic_name -m "Hi this is test message"
-</code></pre>
-
-<h3>2.2 Setup Authentication</h3>
-<pre><code>
-sudo mosquitto_passwd -c /etc/mosquitto/passwd your_username
-</code></pre>
-
-<h3>2.2 Use (with authentication)</h3>
-<pre><code>
-<i>192.168.1.4 (IP of Raspberry Pi)</i>
-
-<i>Open a Terminal and type it...</i>
-mosquitto_sub -t "topic" -u "your_username" -P "your_password"
-
-<i>Open another Terminal and type it...</i>
-mosquitto_pub -t "topic" -m "message from mosquitto_pub client" -u "your_username" -P "your_password"
-</code></pre>
-
-<h3>3.Usefull commands</h3>
-<pre><code>
-sudo systemctl status mosquitto
-sudo systemctl start mosquitto
-sudo systemctl restart mosquitto
-sudo systemctl stop mosquitto
-</code></pre>
-
-<h3>4.Configuration file</h3>
-<pre><code>
-sudo nano /etc/mosquitto/mosquitto.conf
-</code></pre>
-
-<h3>4.1.Configuration file Content</h3>
-<pre><code>
-    ##### CONFIGURATIOS (AUTHENTICATION NOT NEEDED) ######
-
-    listener 1883
-    pid_file /var/run/mosquitto.pid
-    
-    persistence true
-    persistence_location /var/lib/mosquitto/
-    
-    log_dest file /var/log/mosquitto/mosquitto.log
-    
-    include_dir /etc/mosquitto/conf.d
-    
-    allow_anonymous true
-    
-    ................................................................................................
-    
-    ##### CONFIGURATIOS (NEED AUTHENTICATE) ######
-    
-    listener 1883
-    #pid_file /var/run/mosquitto.pid
-    
-    persistence true
-    persistence_location /var/lib/mosquitto/
-    
-    log_dest file /var/log/mosquitto/mosquitto.log
-    
-    include_dir /etc/mosquitto/conf.d
-    allow_anonymous false
-    password_file /etc/mosquitto/passwd
-</code></pre>
-
-<h3>3. ESP32 code</h3>
+<h3>1. ESP8266 code</h3>
 <pre><code>
     #include &lt;ESP8266WiFi.h&gt;
     #include &lt;PubSubClient.h&gt;
@@ -302,6 +200,61 @@ sudo nano /etc/mosquitto/mosquitto.conf
         }
 </code></pre>
 
+<h3>2. ESP32 code</h3>
+<pre><code>
+    #include &lt;WiFi.h&gt;
+    #include &lt;PubSubClient.h&gt;
+        
+        const char* ssid = "wifi ssid";
+        const char* password =  "wifi password";
+        const char* mqttServer = "192.168.1.4"; // local ip address
+        const int mqttPort = 1883;
+        const char* mqttUser = "mqqtt_user that configured on mosquitto";
+        const char* mqttPassword = "mqqtt_password for mqtt_user that configured on mosquitto";
+        
+        WiFiClient espClient;
+        PubSubClient client(espClient);
+        
+        void setup() {
+          WiFi.mode(WIFI_STA);
+          Serial.begin(115200);
+          WiFi.begin(ssid, password);
+        
+          while (WiFi.status() != WL_CONNECTED) {
+            delay(500);
+            Serial.println("Connecting to WiFi..");
+          }
+        
+          Serial.println("Connected to the WiFi network");
+        
+          client.setServer(mqttServer, mqttPort);
+        
+          while (!client.connected()) {
+            Serial.println("Connecting to MQTT...");
+        
+            if (client.connect("arduinoClient",mqttUser,mqttPassword)) {
+        
+              Serial.println("connected");
+        
+            } else {
+        
+              Serial.print("failed with state ");
+              Serial.print(client.state());
+              delay(2000);
+        
+            }
+          }
+        
+          client.publish("esp/test", "Hello from ESP32");
+        
+        }
+        
+        void loop() {
+          client.publish("esp/test", "Hello from ESP32");
+          delay(5000);
+          client.loop();
+        }
+</code></pre>
 
     </div>
 
