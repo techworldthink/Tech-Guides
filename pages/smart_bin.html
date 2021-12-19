@@ -1,0 +1,351 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Bin IoT</title>
+
+    <style>
+        body {
+            padding-left: 1em;
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            color: green;
+            border-bottom: 1px solid gray;
+            padding-bottom: 1em;
+        }
+
+        h2 {
+            color: gray;
+            font-weight: 100;
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            text-transform: none;
+            background-color: white;
+            border-left: 2px solid #c61e4a;
+            padding-left: .5em;
+            margin-top: 3em;
+        }
+
+        pre,
+        code {
+            color: #ccc;
+            background: none;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 1em;
+            text-align: left;
+            white-space: pre;
+
+            margin: 0.5em 0;
+            overflow: auto;
+            background: white;
+        }
+
+        pre code {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            color: red;
+        }
+
+        b,
+        p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 21px;
+            margin-top: 2em;
+            display: block;
+            color: gray;
+            font-weight: 100;
+            line-height: 30px;
+        }
+
+        i {
+            color: gray;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .pink {
+            color: #363434;
+            background-color: #27272740;
+            display: block;
+            width: fit-content;
+        }
+
+        .left {
+            text-align: left;
+            text-decoration: none;
+            border: none;
+            padding: 0;
+            margin: 0%;
+        }
+
+        .black {
+            color: black;
+        }
+
+        .pheads {
+            display: inline-block;
+            border-bottom: 2px solid red;
+            color: black;
+            font-weight: 600;
+            padding: 5px;
+        }
+
+        .img {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .img {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        img{
+            width: 100%;
+        }
+        @media only screen and (max-width: 726px) {
+            img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+
+        <h2>IoT Based Smart Trash Bin </h2>
+        <a class="original" href="">--Resource
+            --</a>
+
+        <h3>0 Circuits </h3>
+        <div class="img">
+            <img src="images/smart_bin/0001.jpg"><br>
+            <img src="images/smart_bin/IMG_20211214_200452_137.jpg">
+        </div>
+        <h3>1. MySQL </h3>
+        <p>
+            1. Create a DB - d_bin<br>
+            2. Save the below codes as sql files3. <br>
+            3. Import the sql file to your database
+        </p>
+        <pre><code>
+    -- phpMyAdmin SQL Dump
+    -- version 5.1.1
+    -- https://www.phpmyadmin.net/
+    --
+    -- Host: 127.0.0.1
+    -- Generation Time: Dec 19, 2021 at 01:53 PM
+    -- Server version: 10.4.20-MariaDB
+    -- PHP Version: 8.0.9
+    
+    SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+    START TRANSACTION;
+    SET time_zone = "+00:00";
+    
+    
+    /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+    /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+    /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+    /*!40101 SET NAMES utf8mb4 */;
+    
+    --
+    -- Database: `d_bin`
+    --
+    
+    -- --------------------------------------------------------
+    
+    --
+    -- Table structure for table `d_msg1`
+    --
+    
+    CREATE TABLE `d_msg1` (
+      `id` int(11) NOT NULL,
+      `m_id` varchar(150) NOT NULL,
+      `b_id` varchar(150) NOT NULL,
+      `b_uid` varchar(150) NOT NULL,
+      `level` varchar(150) NOT NULL,
+      `st` varchar(150) NOT NULL,
+      `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+      `dt` date NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    
+    --
+    -- Indexes for dumped tables
+    --
+    
+    --
+    -- Indexes for table `d_msg1`
+    --
+    ALTER TABLE `d_msg1`
+      ADD PRIMARY KEY (`id`);
+    
+    --
+    -- AUTO_INCREMENT for dumped tables
+    --
+    
+    --
+    -- AUTO_INCREMENT for table `d_msg1`
+    --
+    ALTER TABLE `d_msg1`
+      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+    COMMIT;
+    
+    /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+    /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+    /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+    
+</code></pre>
+
+
+
+        <h3>2. PHP Code</h3>
+        <p>
+            1.Create a folder inside htdocs folder - dustbin<br>
+            2. Create a php file inside dustbin fodler - dustbin.php<br>
+            2. Save the below codes in dustbin.php file <br>
+        </p>
+<pre><code>
+    &lt;?php
+        $dbcon=mysqli_connect("localhost","root","","d_bin");
+
+        $l=$_GET['level'];
+        $m=$_GET['m_id'];
+        $b=$_GET['b_id'];
+        $buid=$_GET['b_uid'];
+        $st=$_GET['st'];
+        $date=date('Y-m-d');  
+        
+        $res=mysqli_query($dbcon,"insert into d_msg1 (id,m_id,b_id,b_uid,level,st,dt) values ('','$m','$b','$buid','$l','$st','$date')");
+    ?&gt;
+</code></pre>
+
+
+
+        </code>
+        <h3>3. Arduino Code</h3>
+        <p>
+            1. Replace WIfi- username & Password<br>
+            2. Replace IP Address 192.168.1.3 to your local IP
+        </p>
+        <pre><code>
+  #include "WiFiEsp.h"
+  #include &lt;SoftwareSerial.h&gt;
+  //SoftwareSerial EspSerial(2, 3); // RX, TX
+  
+  #define triggerpin 6
+  #define echopin 7
+  
+  #define red 9
+  #define green 10
+  #define yellow 11
+  #define high 12
+  
+  int level = 0;
+  
+  void setup() {
+    //Serial.begin(9600);
+    Serial.begin(115200);
+    //Serial.begin(115200);
+    WiFi.init(&Serial);
+    pinMode(triggerpin, OUTPUT);
+    pinMode(echopin, INPUT);
+    pinMode(red, OUTPUT);
+    pinMode(green, OUTPUT);
+    pinMode(yellow, OUTPUT);
+    pinMode(high, OUTPUT);
+  
+    Serial.println("AT+RST\r\n");
+    Serial.println("AT+RST\r\n");
+    delay(500);
+    Serial.println("AT+CWMODE=3\r\n");
+    delay(500);
+    Serial.println("AT+CWJAP=\"DEN;BB JOBIN\",\"wifi-username\"\r\n");
+    //Serial.println("AT+CWJAP=\"Gray_hat:)\",\"wifi-passwrod\"\r\n");
+    delay(500);
+    Serial.println("AT+CIPMUX=1\r\n");
+    delay(500);
+  }
+  
+  void loop() {
+    //  SendMessage();
+    digitalWrite(high, HIGH);
+    digitalWrite(triggerpin, LOW);
+    delay(5);
+    digitalWrite(triggerpin, HIGH);
+    delay(10);
+    digitalWrite(triggerpin, LOW);
+    long duration = pulseIn(echopin, HIGH);
+    int distance = duration * 0.034 / 2;
+    Serial.println(distance);
+    Serial.println(duration);
+    
+    // smart bin line-height
+    // middle 8-15
+    // full 15+
+
+    if (distance <= 8){
+      digitalWrite(red, LOW);
+      digitalWrite(green, HIGH);
+      digitalWrite(yellow, HIGH);
+      level = 2;
+    }else if (distance > 8 && distance <= 15){
+      digitalWrite(red, HIGH);
+      digitalWrite(green, HIGH);
+      digitalWrite(yellow, LOW);
+      level = 1;
+    }else if (distance > 15){
+      digitalWrite(red, HIGH);
+      digitalWrite(green, LOW);
+      digitalWrite(yellow, HIGH);
+      level = 0;
+    }
+  
+    //SendMessage();
+    SendMessage();
+  }
+  void SendMessage(){
+    Serial.print("AT+CIPSTART=\"TCP\",\"192.168.1.3\",80\r\n");
+    delay(100);
+    if (Serial.find("Error")) {
+      Serial.println("AT+CIPSTART error");
+      return;
+    }
+    Serial.println("AT+CIPSEND=171\r\n");
+    delay(100);
+    
+    Serial.print("GET http://192.168.1.3/dustbin/dustbin.php?m_id=tvm123&b_id=1&b_uid=TR4567&level=");
+    Serial.print(level);
+    Serial.print("&st=");
+    Serial.print(level);
+    Serial.println("success");
+    delay(1000);
+    Serial.println("AT+CIPCLOSE");
+    delay(100);
+  }
+</code></pre>
+
+
+    </div>
+
+    <br><br>
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>
