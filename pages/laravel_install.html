@@ -1,0 +1,165 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install Laravel on Ubuntu 20.04</title>
+    <link href="assets/css/noip2.css" type="text/css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e6e2dd;
+            padding: 1em;
+        }
+
+        img {
+            width: 75%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h2 {
+            background-color: #008375;
+            color: white;
+            font-weight: 100;
+
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            text-transform: none;
+            font-family: monospace;
+            background-color: white;
+            border-left: 2px solid #c61e4a;
+            padding-left: .5em;
+            margin-top: 3em;
+        }
+
+        pre,
+        code {
+            color: #ccc;
+            background: none;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+            font-size: 1em;
+            text-align: left;
+            white-space: pre;
+
+            margin: 0.5em 0;
+            overflow: auto;
+            background: #2d2d2d;
+        }
+
+        pre code {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            color: orange;
+        }
+
+        b {
+            font-family: monospace;
+            font-size: 15px;
+            margin-top: 2em;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2>Install Laravel on Ubuntu 20.04</h2>
+        <a class="original" href="https://www.rosehosting.com/blog/install-laravel-on-ubuntu-20-04/">--Resource --</a>
+
+        <h3>Update</h3>
+        <b>Update your system:</b>
+        <pre><code>
+    sudo sudo apt update -y 
+    sudo apt-get upgrade -y
+    </pre></code>
+
+    <h3>Install Apache and PHP</h3>
+    <b>Install the Apache webserver, PHP, and required PHP extensions:</b>
+    <pre><code>
+    sudo apt-get install apache2 php7.4 libapache2-mod-php7.4 php7.4-curl php-pear php7.4-gd php7.4-dev php7.4-zip php7.4-mbstring php7.4-mysql php7.4-xml curl -y
+    </pre></code>
+    <b>Apache service - commands</b>
+    <pre><code>
+    systemctl status apache2
+    systemctl start apache2
+    systemctl enable apache2
+    </pre></code>
+
+    <h3>Install Composer</h3>
+    <b>Update your system:</b>
+    <pre><code>
+    sudo url -sS https://getcomposer.org/installer | php
+    sudo mv composer.phar /usr/local/bin/composer
+    sudo chmod +x /usr/local/bin/composer
+    </pre></code>
+    <b>verify the installed version:</b>
+    <pre><code>
+    composer --version
+    </pre></code>
+
+    <h3>Install Laravel Framework</h3>
+    <b>To install:</b>
+    <pre><code>
+    cd /var/www/html
+    sudo composer create-project laravel/laravel laravelapp --prefer-dist
+    cd laravelapp
+    php artisan
+    </pre></code>
+    <b>Change the ownership of the laravelapp directory and give proper permissions to the storage directory</b>
+    <pre><code>
+    chown -R www-data:www-data /var/www/html/laravelapp
+    chmod -R 775 /var/www/html/laravelapp/storage
+    </pre></code>
+
+    <h3>Configure Apache to Serve Laravel App</h3>
+    <b>Edit configuration file:</b>
+    <pre><code>
+    sudo nano /etc/apache2/sites-available/laravel.conf
+    </pre></code>
+    <b>Add these lines to the file (laravel.conf):</b>
+    <pre><code>
+    &lt;VirtualHost *:80&gt;
+        ServerName localhost
+        ServerAdmin admin@example.com
+        DocumentRoot /var/www/html/laravelapp/public
+        &lt;Directory /var/www/html/laravelapp&gt;
+        AllowOverride All
+        &lt;/Directory&gt;
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+    </pre></code>
+    <b>Save and close the file when you are finished. Then, enable the Apache virtual host and rewrite module with the following command:</b>
+    <pre><code>
+    a2ensite laravel.conf
+    a2enmod rewrite
+    </pre></code>
+    <b>Restart the Apache service:</b>
+    <pre><code>
+    systemctl restart apache2
+    </pre></code>
+
+    <h3>Access Laravel App</h3>
+    <b>Go to this url on browser:</b>
+    <pre><code>
+    localhost/
+    </pre></code>
+
+
+    </div>
+    <br><br>
+    <footer>
+        <a class="acenter" href="">LearnToday</a>
+    </footer>
+
+    <script src="assets/js/javascript.js"> </script>
+</body>
+
+</html>
