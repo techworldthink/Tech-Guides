@@ -241,8 +241,12 @@
 
 <h3>8. Set a Static ESP32 IP Address</h3>
 <pre><code style="color:white">
-    <i>// Print IP address</i>
-    Serial.println(WiFi.localIP());
+    <i>// Load Wi-Fi library</i>
+    #include &lt;WiFi.h&gt;
+
+    <i>// Replace with your network credentials (STATION)</i>
+    const char* ssid = "REPLACE_WITH_YOUR_SSID";
+    const char* password = "REPLACE_WITH_YOUR_PASSWORD";
 
     <i>// Set your Static IP address</i>
     IPAddress local_IP(192, 168, 1, 184);
@@ -253,10 +257,27 @@
     IPAddress primaryDNS(8, 8, 8, 8);       <i>// optional</i>
     IPAddress secondaryDNS(8, 8, 4, 4);     <i>// optional</i>
 
+    <i>// inside Void setup</i>
     <i>// Configures static IP address</i>
     if (!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) {
         Serial.println("STA Failed to configure");
     }
+
+    <i>// Connect to Wi-Fi network with SSID and password</i>
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+
+    <i>// Print local IP address</i>
+    Serial.println("");
+    Serial.println("WiFi connected.");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+
 </code></pre>
 
 <h3>9. Disconnect & Reconnect</h3>
