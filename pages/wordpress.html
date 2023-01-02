@@ -104,7 +104,8 @@
         sudo mkdir -p /var/www/html/
 
         sudo unzip latest.zip -d /var/www/html/
-
+        
+        <i># not mandatory</i>
         sudo mv /var/www/html/wordpress /var/www/html/example.com
         </code></pre>
         <h3>Step 2: Create a Database and User for WordPress Site</h3>
@@ -167,7 +168,7 @@
         sudo chown www-data:www-data /var/www/example.com/ -R
         </code></pre>
 
-        <h3>Step 4: Create an Apache Virtual Host file for WordPress</h3>
+        <h3>Step 4 (Not mandatory): Create an Apache Virtual Host file for WordPress</h3>
         <pre><code>
         <i># Run the following command to create a virtual host file for your WordPress site in the /etc/apache2/sites-available/ directory.</i>
         sudo nano /etc/apache2/sites-available/example.com.conf
@@ -202,7 +203,7 @@
 
             <i># open browser and type : example.com</i>
         </code></pre>
-        <h3>Step 5: Debugging - Enable </h3>
+        <h3>Step 5 (Not mandatory): Debugging - Enable </h3>
         <p>
             The following code, inserted in your wp-config.php file, will log all errors, notices, and warnings to a
             file called debug.log in the wp-content directory. It will also hide the errors so they do not interrupt
